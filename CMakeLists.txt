@@ -34,7 +34,7 @@ if(ENABLE_TESTING)
     add_executable(runTests ${TEST_SOURCES} src/BasicMath.cpp src/AdvancedMath.cpp)
 
     # Enlazar GoogleTest
-    target_link_libraries(test_suite PRIVATE gtest gtest_main)
+    target_link_libraries(runTests PRIVATE gtest gtest_main)
 
     # Registrar pruebas con CTest
     add_test(NAME AllTests COMMAND runTests)
