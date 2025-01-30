@@ -24,8 +24,8 @@ jobs:
 
         - name: Configure, Build, and Test
           run: |
-            rm -rf build   # Elimina la carpeta build si ya existe
-            mkdir build    # Crea el directorio build
+            rm -rf build   
+            mkdir build    
             cd build
             cmake ..
             cmake --build .
