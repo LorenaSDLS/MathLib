@@ -1,3 +1,4 @@
+include_directories(src)
 cmake_minimum_required(VERSION 3.30)
 project(unit_test)
 
