@@ -29,11 +29,11 @@ if(ENABLE_TESTING)
 
     # Archivos de pruebas
     set(TEST_SOURCES
-        test.cpp
+     tests/test.cpp
     )
 
     # Crear ejecutable de pruebas
-    add_executable(test_suite ${TEST_SOURCES})
+    add_executable(runTests ${TEST_SOURCES} src/BasicMath.cpp src/AdvancedMath.cpp)
 
     # Enlazar GoogleTest
     target_link_libraries(test_suite PRIVATE gtest gtest_main)
