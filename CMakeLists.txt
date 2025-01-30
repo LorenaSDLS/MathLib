@@ -28,9 +28,7 @@ if(ENABLE_TESTING)
     enable_testing()
 
     # Archivos de pruebas
-    set(TEST_SOURCES
-     tests/test.cpp
-    )
+    set(TEST_SOURCES tests/test.cpp)
 
     # Crear ejecutable de pruebas
     add_executable(runTests ${TEST_SOURCES} src/BasicMath.cpp src/AdvancedMath.cpp)
@@ -39,5 +37,5 @@ if(ENABLE_TESTING)
     target_link_libraries(test_suite PRIVATE gtest gtest_main)
 
     # Registrar pruebas con CTest
-    add_test(NAME AllTests COMMAND test_suite)
+    add_test(NAME AllTests COMMAND runTests)
 endif()
