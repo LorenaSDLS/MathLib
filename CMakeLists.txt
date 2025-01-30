@@ -1,21 +1,24 @@
-include_directories(${CMAKE_SOURCE_DIR}/src)
-cmake_minimum_required(VERSION 3.30)
-project(unit_test)
+cmake_minimum_required(VERSION 3.10)
+project(MathLib)
 
 set(CMAKE_CXX_STANDARD 17)
 
+# Incluir la carpeta src para que las cabeceras sean accesibles
+include_directories(${CMAKE_SOURCE_DIR}/src)
+
 set(SOURCES
-        main.cpp
-        MyMathLib.h
+    src/BasicMath.cpp
+    src/AdvancedMath.cpp
+    main.cpp
 )
 
+# Crear el ejecutable principal
+add_executable(MathLib ${SOURCES})
 
-add_executable(unit_test main.cpp)
+# Opciones para pruebas unitarias
+option(ENABLE_TESTING "Enable Unit Testing build." ON)
 
-# Opciones
-option(ENABLE_TESTING "Enable a Unit Testing build." ON)
-
-# Descarga GoogleTest usando FetchContent
+# Descarga e incluye GoogleTest
 include(FetchContent)
 FetchContent_Declare(
     googletest
@@ -24,19 +27,18 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-# Si se habilitan las pruebas, agrega GoogleTest y las pruebas unitarias
 if(ENABLE_TESTING)
     enable_testing()
 
-    # Archivos de pruebas
+    # Definir los archivos de prueba
     set(TEST_SOURCES tests/test.cpp)
 
-    # Crear ejecutable de pruebas
+    # Crear el ejecutable para pruebas
     add_executable(runTests ${TEST_SOURCES} src/BasicMath.cpp src/AdvancedMath.cpp)
 
-    # Enlazar GoogleTest
-    target_link_libraries(runTests PRIVATE gtest gtest_main)
+    # Enlazar GoogleTest y pthread (necesario en Mac)
+    target_link_libraries(runTests PRIVATE gtest gtest_main pthread)
 
-    # Registrar pruebas con CTest
+    # Registrar las pruebas en CTest
     add_test(NAME AllTests COMMAND runTests)
 endif()
