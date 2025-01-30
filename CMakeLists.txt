@@ -1,4 +1,4 @@
-include_directories(src)
+include_directories(${CMAKE_SOURCE_DIR}/src)
 cmake_minimum_required(VERSION 3.30)
 project(unit_test)
 

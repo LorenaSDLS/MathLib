@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include "BasicMath.h"
-#include "AdvancedMath.h"
+#include "../src/BasicMath.h"
+#include "../src/AdvancedMath.h"
 
 TEST(BasicMathTest, Sumar) {
     EXPECT_EQ(BasicMath::sumar(3, 4), 7);
