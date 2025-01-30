@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++  -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/MathLib.dir/src/BasicMath.cpp.o CMakeFiles/MathLib.dir/src/AdvancedMath.cpp.o CMakeFiles/MathLib.dir/main.cpp.o -o MathLib
