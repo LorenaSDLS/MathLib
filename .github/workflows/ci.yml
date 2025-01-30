@@ -1,0 +1,22 @@
+name: CMake and GoogleTest CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: sudo apt update && sudo apt install -y cmake g++ ninja-build
+
+      - name: Configure CMake
+        run: mkdir build && cd build && cmake ..
+
+      - name: Build project
+        run: cd build && make
+
+      - name: Run tests
+        run: cd build && ./runTests
