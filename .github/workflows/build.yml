@@ -7,47 +7,47 @@ on:
 
 jobs:
   build:
-    name: Run Unit Tests and SonarQube Scan
+    name: Build and analyze
     runs-on: ubuntu-latest
-    
+
     steps:
-      # 1. Clonar el repositorio
+      # 1️⃣ Clonar el repositorio
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Necesario para un mejor análisis en SonarQube
 
-      # 2. Instalar dependencias necesarias
+      # 2️⃣ Instalar dependencias necesarias
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake build-essential
 
-      # 3. Configurar y compilar el proyecto
+      # 3️⃣ Configurar y Compilar el Proyecto
       - name: Configure and Build
         run: |
-          rm -rf build  # Eliminar build si ya existe para evitar errores
+          rm -rf build  # Eliminar la carpeta build si ya existe para evitar conflictos
           mkdir build
           cd build
           cmake ..
           cmake --build .
 
-      # 4. Ejecutar pruebas unitarias
+      # 4️⃣ Ejecutar Pruebas Unitarias
       - name: Run Tests
         run: |
           cd build
           ctest --output-on-failure
 
-      # 5. Escanear con SonarQube
+      # 5️⃣ Analizar el código con SonarQube
       - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@v3
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: |
-          sonar-scanner
 
-      # 6. (Opcional) Configurar Quality Gate para que falle si no cumple con los criterios de calidad
+      # 6️⃣ (Opcional) Configurar Quality Gate para fallar si no cumple con los criterios de calidad
       # - name: SonarQube Quality Gate Check
       #   uses: sonarsource/sonarqube-quality-gate-action@master
       #   timeout-minutes: 5
       #   env:
       #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
